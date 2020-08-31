@@ -30,7 +30,13 @@ function App() {
                 <Button buttonText="Add Image to Your Meme" />
               </div>
               <div>
-                <MemeTextInput label={"text"} id={"memeText"} labelText={"Text"} value={"Text"} />
+                <div className="meme-text-input">
+                  <MemeTextInput label={"text"} id={"memeText"} labelText={"Text"} placeholder={"Text"} />
+                </div>
+              </div>
+              <div className="button-group create-meme-button-group">
+                <Button buttonText="Reset" buttonIcon={plusCircleIcon} />
+                <Button buttonText="Generate Meme" />
               </div>
             </div>
           </div>

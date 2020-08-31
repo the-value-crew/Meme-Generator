@@ -6,7 +6,7 @@ function MemeTextInput(props) {
         <div class="field">
             <label class="label" for={props.id}>{props.labelText}</label>
             <div class="control">
-                <input class="input" type="text" id={props.id} placeholder={props.placeholder} value={props.value} />
+                <input class="input" type="text" id={props.id} placeholder={props.placeholder} />
             </div>
         </div>
     );
