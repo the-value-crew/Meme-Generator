@@ -3,7 +3,9 @@ import "./button.scss";
 
 function Button(props) {
     return (
-        <button onClick={props.onButtonClick} className="button">{props.buttonText}</button>
+        <button onClick={props.onButtonClick} className="button"> { props.buttonIcon ? <img src={props.buttonIcon}></img> : ''}
+            {props.buttonText}
+        </button>
     )
 }
 
