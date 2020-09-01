@@ -1,9 +1,14 @@
 import React from 'react';
 import './App.scss';
 import Button from './components/button/Button';
-import meme from './meme.png';
+import meme from './assets/images/meme.png';
 import plusCircleIcon from './assets/icons/plus-circle.svg';
+import undoIcon from './assets/icons/undo-alt.svg';
+
 import MemeTextInput from './components/meme-text-input/MemeTextInput';
+import Header from './components/header/Header';
+import MemeSelection from './components/meme-selection/MemeSelection';
+import "./sass/all.scss";
 
 function App() {
 
@@ -13,21 +18,19 @@ function App() {
   return (
     <div className="App">
       <div className="container">
-        <header className="app-header">
-          <h1>
-            <span class="underline-text">MEME
-                <div class="title-underline"></div></span> Generator
-          </h1>
-        </header>
+        <Header />
         <section className="meme-generator-section">
           <div className="meme-grid">
-            <div className="col">
+            <div className="col meme-col">
               <img src={meme} alt="Meme Create" />
             </div>
-            <div className="col">
+            <div className="col meme-creator-col">
               <div className="button-group">
                 <Button buttonText="Add Your Own Image" buttonIcon={plusCircleIcon} />
-                <Button buttonText="Add Image to Your Meme" />
+                <Button buttonText="Add Image to Your Meme" buttonIcon={plusCircleIcon} />
+              </div>
+              <div>
+                <MemeSelection />
               </div>
               <div>
                 <div className="meme-text-input">
@@ -35,8 +38,10 @@ function App() {
                 </div>
               </div>
               <div className="button-group create-meme-button-group">
-                <Button buttonText="Reset" buttonIcon={plusCircleIcon} />
-                <Button buttonText="Generate Meme" />
+                <div className="reset-button-container">
+                  <Button buttonText="Reset" classes={"--black"} buttonIcon={undoIcon} />
+                </div>
+                <Button buttonText="Generate Meme" buttonIcon={plusCircleIcon} />
               </div>
             </div>
           </div>

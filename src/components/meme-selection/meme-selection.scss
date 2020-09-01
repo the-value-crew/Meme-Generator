@@ -1,0 +1,44 @@
+@import "../../sass/variables.scss";
+
+.meme-selection-container {
+    overflow: scroll;
+    overflow-y: hidden;
+    scrollbar-width: 2px;
+    white-space: nowrap;
+    margin-top: 20px;
+    div {
+        margin-right: 5px;
+    }
+}
+
+.meme-selection-image {
+    width: 65px;
+    height: 65px;
+    display: inline-block;
+}
+
+
+
+/* width */
+::-webkit-scrollbar {
+    width: 5px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    -webkit-border-radius: 999px;
+    border-radius: 999px;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+    background: #888;
+    -webkit-border-radius: 999px;
+    border-radius: 999px;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+    background: $value-dark;
+}

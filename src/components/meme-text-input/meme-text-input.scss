@@ -1,4 +1,5 @@
 
+@import "../../sass/variables.scss";
 
 input,
 textarea {
@@ -8,10 +9,12 @@ textarea {
     border-style: solid;
     border-radius: 0.25rem;
     width: 100%;
-    padding-top: 0.5rem;
-    padding-bottom: 0.5rem;
+    padding-right: 0.5rem;
+    padding-left: 0.5rem;
     padding-top: 0.75rem;
     padding-bottom: 0.75rem;
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
     line-height: 1.25;
     border-color: #CDCDCD;
     &:focus {
@@ -24,4 +27,28 @@ label {
     margin-bottom: 0.5rem;
     color: #757575;
     font-weight: 600;
+}
+
+.form-controls{
+    background-color: $value-green;
+    display: flex;
+    padding: 0 5px;
+    align-items: center;
+}
+
+.color{
+    width: 50px;
+    height: 30px;
+    background-color: #fff;
+    margin: 0 20px;
+}
+
+.control{
+    display: flex;
+}
+
+.form-controls__settings{
+    display: flex;
+    justify-items: center;
+    align-items: center;
 }
