@@ -9,6 +9,8 @@ import MemeTextInput from './components/meme-text-input/MemeTextInput';
 import Header from './components/header/Header';
 import MemeSelection from './components/meme-selection/MemeSelection';
 import "./sass/all.scss";
+import axios from "axios";
+import api from "./utils/api";
 
 function App() {
 
@@ -30,7 +32,7 @@ function App() {
                 <Button buttonText="Add Image to Your Meme" buttonIcon={plusCircleIcon} />
               </div>
               <div>
-                <MemeSelection />
+                <MemeSelection memes={api.getAllMemes(axios)} />
               </div>
               <div>
                 <div className="meme-text-input">

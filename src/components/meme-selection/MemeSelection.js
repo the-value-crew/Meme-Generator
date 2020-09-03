@@ -7,9 +7,10 @@ export default function MemeSelection() {
         backgroundImage: `url(${meme})`,
         backgroundPosition: "center center",
         backgroundSize: "contain"
-    }
+    };
     return (
         <div>
+            {console.log()}
             <h4>Popular</h4>
             <div className="meme-selection-container">
                 <div className="meme-selection-image" style={memeSelectionImage} >

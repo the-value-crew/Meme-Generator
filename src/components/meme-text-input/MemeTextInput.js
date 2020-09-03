@@ -4,10 +4,10 @@ import cog from "../../assets/icons/cog.svg";
 
 function MemeTextInput(props) {
     return (
-        <div class="field">
-            <label class="label" for={props.id}>{props.labelText}</label>
-            <div class="control">
-                <input class="input" type="text" id={props.id} placeholder={props.placeholder} />
+        <div className="field">
+            <label className="label" htmlFor={props.id}>{props.labelText}</label>
+            <div className="control">
+                <input className="input" type="text" id={props.id} placeholder={props.placeholder} />
                 <div className="form-controls">
                     <div className="form-controls__colors">
                         <div className="color"></div>
