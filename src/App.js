@@ -11,6 +11,7 @@ import MemeSelection from './components/meme-selection/MemeSelection';
 import "./sass/all.scss";
 import axios from "axios";
 import api from "./utils/api";
+import MemeImage from "./components/meme-image/MemeImage";
 
 function App() {
 
@@ -24,7 +25,7 @@ function App() {
         <section className="meme-generator-section">
           <div className="meme-grid">
             <div className="col meme-col">
-              <img src={meme} alt="Meme Create" />
+              <MemeImage meme={meme} />
             </div>
             <div className="col meme-creator-col">
               <div className="button-group">
