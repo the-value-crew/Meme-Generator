@@ -11,34 +11,23 @@
     }
 }
 
-.meme-selection-image {
-    width: 65px;
-    height: 65px;
-    display: inline-block;
-}
-
-
-
-/* width */
 ::-webkit-scrollbar {
     width: 5px;
+    height: 10px;
 }
 
-/* Track */
 ::-webkit-scrollbar-track {
     background: #f1f1f1;
     -webkit-border-radius: 999px;
     border-radius: 999px;
 }
 
-/* Handle */
 ::-webkit-scrollbar-thumb {
     background: #888;
     -webkit-border-radius: 999px;
     border-radius: 999px;
 }
 
-/* Handle on hover */
 ::-webkit-scrollbar-thumb:hover {
     background: $value-dark;
 }
