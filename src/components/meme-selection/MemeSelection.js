@@ -1,7 +1,5 @@
 import React from 'react';
-import meme from '../../assets/images/meme.png'
 import "./meme-selection.scss";
-import api from '../../utils/api';
 import MemeSelectionImage from "../meme-selection-image/MemeSelectionImage";
 
 class MemeSelection extends React.Component {
@@ -26,8 +24,8 @@ class MemeSelection extends React.Component {
             <div>
                 <h4>Popular</h4>
                 <div className="meme-selection-container">
-                    {this.state.memes.map(meme => (
-                        <MemeSelectionImage meme={meme} />
+                    {this.state.memes.map((meme, i) => (
+                        <MemeSelectionImage key={i} meme={meme} />
                     ))}
                 </div>
             </div>

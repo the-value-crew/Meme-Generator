@@ -6,29 +6,22 @@ export default class MemeImage extends Component {
 
     componentDidMount() {
         const canvas = new fabric.Canvas('c');
-        var rect = new fabric.Rect({
-            left: 100,
-            top: 50,
-            fill: '#D81B60',
-            width: 50,
-            height: 50,
-            strokeWidth: 2,
-            stroke: "#880E4F",
-            rx: 10,
-            ry: 10,
-            angle: 45,
-            scaleX: 3,
-            scaleY: 3,
-            hasControls: true
-        });
 
-        canvas.add(rect);
+        fabric.Image.fromURL(this.props.meme, function (myImg) {
+            //i create an extra var for to change some image properties
+            canvas.setHeight(myImg.height);
+            canvas.setWidth(myImg.width);
+            canvas.setBackgroundImage(myImg, canvas.renderAll.bind(canvas), {
+                scaleX: canvas.width / myImg.width,
+                scaleY: canvas.height / myImg.height
+            });
+
+        })
     }
 
     render() {
         return (
             <div>
-                <img src={this.props.meme} alt="Meme Create" />
                 <canvas id="c" />
             </div>
         )
