@@ -7,7 +7,7 @@ class MemeSelection extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            memes: []
+            memes: [],
         }
     }
 
@@ -19,13 +19,18 @@ class MemeSelection extends React.Component {
         });
     }
 
+    onMemeSelection = (meme) => {
+        this.props.onMemeSelection(meme);
+    }
+
+
     render() {
         return (
             <div>
                 <h4>Popular</h4>
                 <div className="meme-selection-container">
                     {this.state.memes.map((meme, i) => (
-                        <MemeSelectionImage key={i} meme={meme} />
+                        <MemeSelectionImage key={i} meme={meme} onMemeSelection={this.onMemeSelection} />
                     ))}
                 </div>
             </div>
