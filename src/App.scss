@@ -33,6 +33,11 @@
     margin-top: 30px;
 }
 
+.canvas-container {
+    .upper-canvas {
+        position: relative !important;
+    }
+}
 
 .icon {
     width: 16px;
@@ -40,15 +45,14 @@
     margin-right: 10px;
 }
 
-.meme-creator-col{
+.meme-creator-col {
     overflow: hidden;
 }
 
-
-body{
+body {
     font-family: $font-title !important;
 }
 
-button{
-    font-family: $font-title
+button {
+    font-family: $font-title;
 }

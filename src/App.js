@@ -18,18 +18,18 @@ export default class App extends Component {
     super(props);
     this.state = {
       currentMeme: {
-        "id": "112126428",
-        "name": "Distracted Boyfriend",
-        "url": "https://i.imgflip.com/1ur9b0.jpg",
-        "width": 1200,
-        "height": 800,
-        "box_count": 3
+
       },
+      memeText: ""
     }
   }
 
   onMemeSelection = (meme) => {
     this.setState({ currentMeme: meme });
+  }
+
+  onTextInput = (text) => {
+    this.setState({ memeText: text });
   }
 
 
@@ -42,7 +42,7 @@ export default class App extends Component {
           <section className="meme-generator-section">
             <div className="meme-grid">
               <div className="col meme-col">
-                <MemeImage meme={this.state.currentMeme} />
+                <MemeImage meme={this.state.currentMeme} memeText={this.state.memeText} />
               </div>
               <div className="col meme-creator-col">
                 <div className="button-group">
@@ -54,7 +54,7 @@ export default class App extends Component {
                 </div>
                 <div>
                   <div className="meme-text-input">
-                    <MemeTextInput label={"text"} id={"memeText"} labelText={"Text"} placeholder={"Text"} />
+                    <MemeTextInput label={"text"} id={"memeText"} labelText={"Text"} placeholder={"Text"} onTextInput={this.onTextInput} />
                   </div>
                 </div>
                 <div className="button-group create-meme-button-group">
@@ -71,4 +71,3 @@ export default class App extends Component {
     );
   }
 }
-
