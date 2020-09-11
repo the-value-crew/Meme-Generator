@@ -7,17 +7,19 @@ export default class MemeSelectionImage extends Component {
         this.props.onMemeSelection(meme);
     }
 
-    render() {
-        const memeSelectionImageStyle = (meme) => {
-            return {
-                backgroundImage: `url(${meme})`,
-                backgroundPosition: "center center",
-                backgroundSize: "contain",
-                backgroundSize: "cover"
-            }
+    memeSelectionImageStyle = (url) => {
+        return {
+            backgroundImage: `url(${url})`,
+            backgroundPosition: "center center",
+            backgroundSize: "contain",
+            backgroundSize: "cover"
         }
+    }
+
+    render() {
+        
         return (
-            <div className="meme-selection-image" style={memeSelectionImageStyle(this.props.meme.url)} onClick={() => this.onMemeSelection(this.props.meme)} >
+            <div className="meme-selection-image" style={this.memeSelectionImageStyle(this.props.meme.url)} onClick={() => this.onMemeSelection(this.props.meme)} >
             </div>
         )
     }

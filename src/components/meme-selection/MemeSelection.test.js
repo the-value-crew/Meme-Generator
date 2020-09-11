@@ -92,7 +92,7 @@ it('expects to update state with props recieved memes', async () => {
     expect(componentInstance.state.memes).toEqual(mockMemes);
 });
 
-it('expects to call appropriate method on method call', () => {
+it('expects to call appropriate props on method call', () => {
     const mockMeme = {
         "id": "181913649",
         "name": "Drake Hotline Bling",
