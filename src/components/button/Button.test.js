@@ -1,4 +1,4 @@
-import {shallow,render} from 'enzyme';
+import { shallow, render } from 'enzyme';
 import React from 'react';
 import Button from './Button';
 
@@ -15,6 +15,6 @@ beforeEach(() => {
     renderWrapper = render(<Button {...mockProps} />);
 })
 
-it('expects to render button',()=>{
+it('expects to render button', () => {
     expect(renderWrapper).toMatchSnapshot();
 })
