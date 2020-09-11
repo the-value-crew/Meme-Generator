@@ -16,6 +16,7 @@ class MemeSelection extends React.Component {
             this.setState({
                 memes: memes
             });
+            console.log(this.props.memes);
         });
     }
 
