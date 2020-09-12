@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`expects to render counter button 1`] = `
+exports[`expects to render header component 1`] = `
 initialize {
   "0": Object {
     "attribs": Object {

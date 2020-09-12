@@ -18,7 +18,7 @@ beforeEach(() => {
 })
 
 
-it('expects to render counter button', () => {
+it('expects to render meme text input', () => {
     expect(renderWrapper).toMatchSnapshot();
 });
 
