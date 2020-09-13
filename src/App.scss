@@ -42,7 +42,6 @@
 .icon {
     width: 16px;
     height: 16px;
-    margin-right: 10px;
 }
 
 .meme-creator-col {
@@ -55,4 +54,8 @@ body {
 
 button {
     font-family: $font-title;
+}
+
+.mr-0{
+    margin-right: 0 !important;
 }

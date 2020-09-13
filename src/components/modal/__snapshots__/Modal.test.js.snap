@@ -31,16 +31,8 @@ initialize {
             "namespace": "http://www.w3.org/1999/xhtml",
             "next": Object {
               "attribs": Object {},
-              "children": Array [
-                Object {
-                  "data": "Some text in the Modal..",
-                  "next": null,
-                  "parent": [Circular],
-                  "prev": null,
-                  "type": "text",
-                },
-              ],
-              "name": "p",
+              "children": Array [],
+              "name": "div",
               "namespace": "http://www.w3.org/1999/xhtml",
               "next": null,
               "parent": [Circular],
@@ -61,16 +53,8 @@ initialize {
           },
           Object {
             "attribs": Object {},
-            "children": Array [
-              Object {
-                "data": "Some text in the Modal..",
-                "next": null,
-                "parent": [Circular],
-                "prev": null,
-                "type": "text",
-              },
-            ],
-            "name": "p",
+            "children": Array [],
+            "name": "div",
             "namespace": "http://www.w3.org/1999/xhtml",
             "next": null,
             "parent": [Circular],

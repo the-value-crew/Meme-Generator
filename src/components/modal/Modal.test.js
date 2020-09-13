@@ -5,8 +5,8 @@ import Modal from './Modal';
 let shallowWrapper;
 let renderWrapper;
 beforeEach(() => { 
-    shallowWrapper = shallow(<Modal />);
-    renderWrapper = render(<Modal />);
+    shallowWrapper = shallow(<Modal showModal={true}/>);
+    renderWrapper = render(<Modal showModal={true}/>);
 })
 
 
@@ -16,10 +16,10 @@ it('expects to render meme text input', () => {
 
 it('expects to toggle show modal state',()=>{
     const componentInstance = shallowWrapper.instance();
-    const initialShowModalState = shallowWrapper.state.showModal;
     shallowWrapper.find(".close").simulate("click");
     expect(shallowWrapper.find(".close").length).toBe(1);
-    expect(componentInstance.state.showModal).toBe(!initialShowModalState);
+    componentInstance.toggleModal();
+    expect(componentInstance.state.showModal).toBe(true);
 });
 
 it('expects correct style on state value ', () => {

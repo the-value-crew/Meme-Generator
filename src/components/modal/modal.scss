@@ -16,7 +16,10 @@
     border-radius: 20px;
     padding: 20px;
     border: 1px solid #888;
-    width: 60%;
+    width: 30%;
+    position: relative;
+    overflow: hidden;
+
 }
 
 .close {
@@ -24,6 +27,9 @@
     float: right;
     font-size: 28px;
     font-weight: bold;
+    position: absolute;
+    right: 15px;
+    top: 5px;
 }
 
 .close:hover,
