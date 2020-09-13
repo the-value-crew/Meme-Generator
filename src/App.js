@@ -10,6 +10,7 @@ import MemeSelection from './components/meme-selection/MemeSelection';
 import "./sass/all.scss";
 import axios from "axios";
 import api from "./utils/api";
+import Modal from "./components/modal/Modal";
 import MemeImage from "./components/meme-image/MemeImage";
 
 export default class App extends Component {
@@ -63,6 +64,7 @@ export default class App extends Component {
                   </div>
                   <Button buttonText="Generate Meme" buttonIcon={plusCircleIcon} />
                 </div>
+                <Modal />
               </div>
             </div>
           </section>
