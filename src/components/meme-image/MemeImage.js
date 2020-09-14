@@ -7,14 +7,15 @@ export default class MemeImage extends Component {
 
     componentDidUpdate() {
         const canvas = new fabric.Canvas('memeCanvas');
-        let memeText = this.props.memeText;
-        console.log(memeText);
+        let memeTextObject = this.props.memeText;
+
+        console.log(memeTextObject);
 
         this.loadCanvasData(canvas);
 
         this.loadBackgroundImageToCanvas(canvas, this.props.meme);
 
-        this.addTextToCanvas(canvas, memeText);
+        this.addTextToCanvas(canvas, memeTextObject);
 
         this.saveCanvasData(canvas);
 
@@ -27,7 +28,6 @@ export default class MemeImage extends Component {
     }
 
     handleMouseOut(e, canvas) {
-        console.log("Moved");
         this.saveCanvasData(canvas);
         canvas.renderAll();
     }
@@ -38,9 +38,10 @@ export default class MemeImage extends Component {
         });
     }
 
-    addTextToCanvas(canvas, text) {
-        canvas.add(new fabric.Text(text, {
-            fontFamily: 'Impact',
+    addTextToCanvas(canvas, memeTextObject) {
+        canvas.add(new fabric.Text(memeTextObject.text, {
+            fontFamily: memeTextObject.settings.fontFamily,
+            fill: memeTextObject.settings.color,
             left: 100,
             top: 100
         }));

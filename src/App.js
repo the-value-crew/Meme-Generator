@@ -20,7 +20,13 @@ export default class App extends Component {
       currentMeme: {
 
       },
-      memeText: "",
+      textData: {
+        text: "",
+        settings: {
+          color: "#000000",
+          fontFamily: "Impact"
+        }
+      },
     }
   }
 
@@ -29,7 +35,7 @@ export default class App extends Component {
   }
 
   onTextInput = (text) => {
-    this.setState({ memeText: text });
+    this.setState({ textData: text });
   }
 
   getMemeSettings = (value) => {
@@ -46,7 +52,7 @@ export default class App extends Component {
           <section className="meme-generator-section">
             <div className="meme-grid">
               <div className="col meme-col">
-                <MemeImage meme={this.state.currentMeme} memeText={this.state.memeText} />
+                <MemeImage meme={this.state.currentMeme} memeText={this.state.textData} />
               </div>
               <div className="col meme-creator-col">
                 <div className="button-group">
