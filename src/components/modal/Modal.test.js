@@ -14,14 +14,6 @@ it('expects to render meme text input', () => {
     expect(renderWrapper).toMatchSnapshot();
 });
 
-it('expects to toggle show modal state',()=>{
-    const componentInstance = shallowWrapper.instance();
-    shallowWrapper.find(".close").simulate("click");
-    expect(shallowWrapper.find(".close").length).toBe(1);
-    componentInstance.toggleModal();
-    expect(componentInstance.state.showModal).toBe(true);
-});
-
 it('expects correct style on state value ', () => {
     const componentInstance = shallowWrapper.instance();
     const trueStyle = {

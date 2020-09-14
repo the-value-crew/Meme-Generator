@@ -6,7 +6,7 @@ initialize {
     "attribs": Object {
       "class": "modal",
       "id": "modal",
-      "style": "display:none",
+      "style": "display:block",
     },
     "children": Array [
       Object {

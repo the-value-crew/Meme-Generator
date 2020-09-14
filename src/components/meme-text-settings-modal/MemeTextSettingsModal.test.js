@@ -35,13 +35,8 @@ it('expects to call props on button click', ()=>{
         getMemeSettings: getMemeSettingsCallback
     };
     let shallowWrapper = shallow(<MemeTextSettingsModal {...mockProps} />);
-    shallowWrapper.find(".save-settings-button").simulate("click");
-    expect(getMemeSettingsCallback).toHaveBeenCalledTimes(1);
-});
-
-it('expects to toggle show modal state',()=>{
     const componentInstance = shallowWrapper.instance();
-    shallowWrapper.find(".save-settings-button").simulate("click");
-    expect(shallowWrapper.find(".save-settings-button").length).toBe(1);
-    expect(componentInstance.state.showModal).toBe(true);
+    componentInstance.getMemeTextSettings();
+
+    expect(getMemeSettingsCallback).toHaveBeenCalledTimes(1);
 });
