@@ -8,6 +8,7 @@ export default class MemeImage extends Component {
     componentDidUpdate() {
         const canvas = new fabric.Canvas('memeCanvas');
         let memeText = this.props.memeText;
+        console.log(memeText);
 
         this.loadCanvasData(canvas);
 

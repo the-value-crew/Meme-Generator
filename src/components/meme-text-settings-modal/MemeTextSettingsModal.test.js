@@ -10,25 +10,25 @@ beforeEach(() => {
 })
 
 
-// it('expects to render meme text input', () => {
-//     expect(renderWrapper).toMatchSnapshot();
-// });
+it('expects to render meme text input', () => {
+    expect(renderWrapper).toMatchSnapshot();
+});
 
 it('expects to change color state on keypress', () => {
     const componentInstance = shallowWrapper.instance();
-    shallowWrapper.find('#hex-color-input').simulate('keydown', {key: 'Enter', target: {value: "#ffffff"}});
-    const stateColor =  componentInstance.state.memeTextSettings.color;
+    shallowWrapper.find('#hex-color-input').simulate('keydown', { key: 'Enter', target: { value: "#ffffff" } });
+    const stateColor = componentInstance.state.memeTextSettings.color;
     expect(stateColor).toEqual("#ffffff");
 });
 
 it('expects to change fontFamily state on keypress', () => {
     const componentInstance = shallowWrapper.instance();
-    shallowWrapper.find('#fonts').simulate('change', {target: {value: "Impact"}});
-    const fontFamily =  componentInstance.state.memeTextSettings.fontFamily;
+    shallowWrapper.find('#fonts').simulate('change', { target: { value: "Impact" } });
+    const fontFamily = componentInstance.state.memeTextSettings.fontFamily;
     expect(fontFamily).toEqual("Impact");
 });
 
-it('expects to call props on button click', ()=>{
+it('expects to call props on button click', () => {
     let getMemeSettingsCallback = jest.fn();
     let mockProps = {
         showModal: true,
@@ -39,4 +39,12 @@ it('expects to call props on button click', ()=>{
     componentInstance.getMemeTextSettings();
 
     expect(getMemeSettingsCallback).toHaveBeenCalledTimes(1);
+});
+
+it('expects to call prop on modal child prop', () => {
+    const mockFunction = jest.fn();
+    const shallowWrapper = shallow(<MemeTextSettingsModal
+        showModal={true} onClose={mockFunction} />);
+    shallowWrapper.find('Modal').props().onClose();
+    expect(mockFunction).toHaveBeenCalledTimes(1);
 });

@@ -25,3 +25,11 @@ it('expects correct style on state value ', () => {
     expect(componentInstance.getAppropriateStyle(true)).toEqual(trueStyle);
     expect(componentInstance.getAppropriateStyle(false)).toEqual(falseStyle);
 });
+
+it('expects to call on close modal prop', () => {
+    const mockFunction = jest.fn();
+    const shallowWrapper = shallow(<Modal
+        showModal={true} onClose={mockFunction} />);
+    shallowWrapper.find('.close').simulate("click");
+    expect(mockFunction).toHaveBeenCalledTimes(1);
+});

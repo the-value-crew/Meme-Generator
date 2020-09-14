@@ -5,34 +5,47 @@ import MemeTextSettingsModal from '../meme-text-settings-modal/MemeTextSettingsM
 import Modal from '../modal/Modal';
 
 class MemeTextInput extends React.Component {
-    
-    constructor(props){
+
+    constructor(props) {
         super(props);
         this.state = {
-            showModal: false
+            showModal: false,
+            textData: {
+                text: "",
+                settings: {
+                    color: "#000000",
+                    fontFamily: "Impact"
+                }
+            }
         }
-    }    
-    
-    onEnter = (e) => {
+    }
+
+    onEnter = async (e) => {
         if (e.key === 'Enter') {
-            this.props.onTextInput(e.target.value)
+            let textData = { ...this.state.textData };
+            textData.text = e.target.value;
+            await this.setState({ textData });
+            this.props.onTextInput(this.state.textData);
         }
     };
 
-    showModal = (_) => {
-        this.setState({showModal: true});
-        console.log("From meme text input");
-        console.log(this.state.showModal);
-    }
+    showModal = (_) => this.setState({ showModal: true });
+    
 
-    getMemeSettings = (settings) =>{
+    getMemeSettings = (settings) => {
         this.onClose();
-        console.log(settings);
+        this.setState(prevState => ({
+            textData: {
+                ...prevState.textData,
+                settings: {
+                    ...settings
+                }
+            }
+        }))
     }
 
-    onClose = () => {
-        this.setState({showModal: false});
-    }
+    onClose = () => this.setState({ showModal: false });
+
 
 
     render() {
