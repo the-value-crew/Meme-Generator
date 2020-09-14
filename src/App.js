@@ -27,6 +27,7 @@ export default class App extends Component {
           fontFamily: "Impact"
         }
       },
+      downloadMeme: false
     }
   }
 
@@ -34,14 +35,18 @@ export default class App extends Component {
     this.setState({ currentMeme: meme });
   }
 
-  onTextInput = (text) => {
-    this.setState({ textData: text });
+  onTextInput = (memeTextObj) => {
+    console.log("TExt data");
+    this.setState({ textData: memeTextObj });
   }
 
   getMemeSettings = (value) => {
     console.log(value);
   }
 
+  downloadMeme = () => {
+    this.setState({downloadMeme: true});
+  }
 
   render() {
 
@@ -52,7 +57,7 @@ export default class App extends Component {
           <section className="meme-generator-section">
             <div className="meme-grid">
               <div className="col meme-col">
-                <MemeImage meme={this.state.currentMeme} memeText={this.state.textData} />
+                <MemeImage meme={this.state.currentMeme} memeText={this.state.textData} downloadCanvas={this.state.downloadMeme} />
               </div>
               <div className="col meme-creator-col">
                 <div className="button-group">
@@ -71,7 +76,7 @@ export default class App extends Component {
                   <div className="reset-button-container">
                     <Button buttonText="Reset" classes={"--black"} buttonIcon={undoIcon} />
                   </div>
-                  <Button buttonText="Generate Meme" buttonIcon={plusCircleIcon} />
+                  <Button buttonText="Generate Meme" buttonIcon={plusCircleIcon} onButtonClick={this.downloadMeme} />
                 </div>
               </div>
             </div>

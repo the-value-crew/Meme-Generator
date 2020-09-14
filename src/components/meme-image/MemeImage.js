@@ -19,6 +19,10 @@ export default class MemeImage extends Component {
 
         this.saveCanvasData(canvas);
 
+        if (this.props.downloadCanvas) {
+            this.saveImage(canvas);
+        }
+
         canvas.on('mouse:out', (e) => this.handleMouseOut(e, canvas));
 
     }
@@ -26,6 +30,18 @@ export default class MemeImage extends Component {
     saveCanvasData(canvas) {
         fabricObject = JSON.stringify(canvas.toJSON());
     }
+
+    saveImage = (canvas) => {
+        console.log("Save Image");
+        let link = document.createElement("a");
+        link.href = canvas.toDataURL({
+            format: 'jpeg',
+            quality: 0.8
+        });
+        link.download = 'canvas.png';
+        link.click();
+    }
+
 
     handleMouseOut(e, canvas) {
         this.saveCanvasData(canvas);
@@ -46,6 +62,9 @@ export default class MemeImage extends Component {
             top: 100
         }));
     }
+    asdf() {
+        console.log("Asdf");
+    }
 
     loadBackgroundImageToCanvas(canvas, meme) {
         const { url } = meme;
@@ -57,6 +76,8 @@ export default class MemeImage extends Component {
                 scaleX: canvas.width / meme.width,
                 scaleY: canvas.height / meme.height
             });
+        }.bind(this), {
+            crossOrigin: 'anonymous'
         });
     }
 

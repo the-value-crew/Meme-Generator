@@ -2,7 +2,6 @@ import React from 'react'
 import "./meme-text-input.scss";
 import cog from "../../assets/icons/cog.svg";
 import MemeTextSettingsModal from '../meme-text-settings-modal/MemeTextSettingsModal';
-import Modal from '../modal/Modal';
 
 class MemeTextInput extends React.Component {
 
@@ -45,8 +44,6 @@ class MemeTextInput extends React.Component {
     }
 
     onClose = () => this.setState({ showModal: false });
-
-
 
     render() {
         return (

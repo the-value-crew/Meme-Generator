@@ -30,9 +30,15 @@ it('expects to change current meme', () => {
 })
 
 it('expects to change memeText state', () => {
-    const mockText = "Welcome to the dark side";
+    const mockText = {
+        memeTextSettings: {
+            color: "#000000",
+            fontFamily: "Impact"
+        },
+        text: "Alu bhannta gobi"
+    };
     const componentInstance = shallowWrapper.instance();
-    expect(componentInstance.state.memeText).toEqual("");
+    expect(componentInstance.state.textData.text).toEqual("");
     componentInstance.onTextInput(mockText);
-    expect(componentInstance.state.memeText).toEqual(mockText);
+    expect(componentInstance.state.textData).toEqual(mockText);
 })
