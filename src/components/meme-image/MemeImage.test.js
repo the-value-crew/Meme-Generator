@@ -25,7 +25,7 @@ it('expects to render meme image component', () => {
     expect(renderWrapper).toMatchSnapshot();
 });
 
-it('expects generate meme true prop to run save meme',()=>{
+it('expects generate meme true prop to run save meme', () => {
     const mockProps = {
         meme: {
             "id": "129242436",
@@ -42,4 +42,9 @@ it('expects generate meme true prop to run save meme',()=>{
     const mockSaveImageFunction = jest.fn();
     shallowWrapper.saveImage = mockSaveImageFunction();
     expect(mockSaveImageFunction).toHaveBeenCalledTimes(1);
+})
+
+it('expects to clear fabric object data on delete method call',()=>{
+    const componentInstance  = shallowWrapper.instance();
+    
 })

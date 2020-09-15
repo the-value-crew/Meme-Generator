@@ -27,7 +27,8 @@ export default class App extends Component {
           fontFamily: "Impact"
         }
       },
-      downloadMeme: false
+      downloadMeme: false,
+      resetCanvas: false
     }
   }
 
@@ -36,7 +37,6 @@ export default class App extends Component {
   }
 
   onTextInput = (memeTextObj) => {
-    console.log("TExt data");
     this.setState({ textData: memeTextObj });
   }
 
@@ -45,8 +45,28 @@ export default class App extends Component {
   }
 
   downloadMeme = () => {
-    this.setState({downloadMeme: true});
+    this.setState({ downloadMeme: true });
   }
+
+  onImageDownloaded = (value) => {
+    this.setState({ downloadMeme: false });
+  }
+
+  onMemeTextClear = () => {
+    let textData = { ...this.state.textData };
+    textData.text = "";
+    this.setState({ textData });
+  }
+
+  resetCanvas = () => {
+    this.setState({ resetCanvas: true });
+  }
+
+  onCanvasReset = () =>{
+    this.onMemeTextClear();
+    this.setState({resetCanvas: false});
+  }
+
 
   render() {
 
@@ -57,7 +77,8 @@ export default class App extends Component {
           <section className="meme-generator-section">
             <div className="meme-grid">
               <div className="col meme-col">
-                <MemeImage meme={this.state.currentMeme} memeText={this.state.textData} downloadCanvas={this.state.downloadMeme} />
+                <MemeImage meme={this.state.currentMeme} memeText={this.state.textData} downloadCanvas={this.state.downloadMeme}
+                  onImageDownloaded={this.onImageDownloaded} onMemeTextClear={this.onMemeTextClear} resetCanvas={this.state.resetCanvas} onCanvasReset={this.onCanvasReset} />
               </div>
               <div className="col meme-creator-col">
                 <div className="button-group">
@@ -74,7 +95,7 @@ export default class App extends Component {
                 </div>
                 <div className="button-group create-meme-button-group">
                   <div className="reset-button-container">
-                    <Button buttonText="Reset" classes={"--black"} buttonIcon={undoIcon} />
+                    <Button buttonText="Reset" classes={"--black"} buttonIcon={undoIcon} onButtonClick={this.resetCanvas} />
                   </div>
                   <Button buttonText="Generate Meme" buttonIcon={plusCircleIcon} onButtonClick={this.downloadMeme} />
                 </div>

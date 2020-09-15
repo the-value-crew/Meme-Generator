@@ -2,25 +2,39 @@ import React, { Component } from 'react';
 import { fabric } from "fabric";
 
 let fabricObject = {};
+let canvas;
 
 export default class MemeImage extends Component {
 
-    componentDidUpdate() {
-        const canvas = new fabric.Canvas('memeCanvas');
-        let memeTextObject = this.props.memeText;
+    componentDidMount(){
+        canvas =  new fabric.Canvas('memeCanvas');
+    }
 
-        console.log(memeTextObject);
+    componentDidUpdate() {
+        let memeTextObject = this.props.memeText;
 
         this.loadCanvasData(canvas);
 
         this.loadBackgroundImageToCanvas(canvas, this.props.meme);
 
-        this.addTextToCanvas(canvas, memeTextObject);
+        if (memeTextObject.text != "") {
+            this.addTextToCanvas(canvas, memeTextObject);
+        }
 
         this.saveCanvasData(canvas);
 
         if (this.props.downloadCanvas) {
+            console.log(canvas);
             this.saveImage(canvas);
+            this.deleteCanvasObjects(canvas);
+            console.log(fabricObject);
+            this.props.onMemeTextClear();
+        }
+
+        if (this.props.resetCanvas) {
+            this.deleteCanvasObjects(canvas);
+            console.log(fabricObject);
+            this.props.onCanvasReset();
         }
 
         canvas.on('mouse:out', (e) => this.handleMouseOut(e, canvas));
@@ -31,8 +45,11 @@ export default class MemeImage extends Component {
         fabricObject = JSON.stringify(canvas.toJSON());
     }
 
+    deleteCanvasObjects(canvas) {
+        fabricObject = JSON.stringify(canvas.remove(...canvas.getObjects()));
+    }
+
     saveImage = (canvas) => {
-        console.log("Save Image");
         let link = document.createElement("a");
         link.href = canvas.toDataURL({
             format: 'jpeg',
@@ -40,15 +57,20 @@ export default class MemeImage extends Component {
         });
         link.download = 'canvas.png';
         link.click();
+        this.onImageSaved();
+    }
+
+    onImageSaved = () => {
+        this.props.onImageDownloaded(true);
     }
 
 
     handleMouseOut(e, canvas) {
-        this.saveCanvasData(canvas);
+        fabricObject = this.saveCanvasData(canvas);
         canvas.renderAll();
     }
 
-    loadCanvasData(canvas) {
+    loadCanvasData = (canvas) => {
         canvas.loadFromJSON(fabricObject, function () {
             canvas.renderAll();
         });
@@ -62,9 +84,7 @@ export default class MemeImage extends Component {
             top: 100
         }));
     }
-    asdf() {
-        console.log("Asdf");
-    }
+
 
     loadBackgroundImageToCanvas(canvas, meme) {
         const { url } = meme;
@@ -81,9 +101,6 @@ export default class MemeImage extends Component {
         });
     }
 
-    componentDidMount() {
-        console.log("Rerendered");
-    }
 
     render() {
         return (
