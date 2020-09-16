@@ -77,7 +77,7 @@ export default class App extends Component {
           <section className="meme-generator-section">
             <div className="meme-grid">
               <div className="col meme-col">
-                <MemeImage meme={this.state.currentMeme} memeText={this.state.textData} downloadCanvas={this.state.downloadMeme}
+                <MemeImage meme={this.state.currentMeme} memeTextObject={this.state.textData} downloadCanvas={this.state.downloadMeme}
                   onImageDownloaded={this.onImageDownloaded} onMemeTextClear={this.onMemeTextClear} resetCanvas={this.state.resetCanvas} onCanvasReset={this.onCanvasReset} />
               </div>
               <div className="col meme-creator-col">

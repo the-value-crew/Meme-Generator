@@ -6,29 +6,44 @@ let canvas;
 
 export default class MemeImage extends Component {
 
-    componentDidMount(){
-        canvas =  new fabric.Canvas('memeCanvas');
+    componentDidMount() {
+        canvas = new fabric.Canvas('memeCanvas');
     }
 
-    componentDidUpdate() {
-        let memeTextObject = this.props.memeText;
+    state = {
+        memeTextObject: {}
+    }
+
+    static getDerivedStateFromProps(props, state) {
+        if (props.memeTextObject != state.memeTextObject) {
+            return {
+                memeTextObject: props.memeTextObject
+            }
+        }
+        return null;
+    }
+
+    componentDidUpdate(prevPrps, prevState) {
+
+        console.log(this.state.memeTextObject);
+        let memeTextObject = this.state.memeTextObject;
 
         this.loadCanvasData(canvas);
 
         this.loadBackgroundImageToCanvas(canvas, this.props.meme);
 
-        if (memeTextObject.text != "") {
+        if (memeTextObject.text != "" && prevPrps.memeTextObject.text !== this.state.memeTextObject.text) {
             this.addTextToCanvas(canvas, memeTextObject);
         }
 
         this.saveCanvasData(canvas);
 
         if (this.props.downloadCanvas) {
-            console.log(canvas);
+            this.setState({ memeTextObject: {} });
+            this.props.onMemeTextClear();
             this.saveImage(canvas);
             this.deleteCanvasObjects(canvas);
             console.log(fabricObject);
-            this.props.onMemeTextClear();
         }
 
         if (this.props.resetCanvas) {
@@ -77,6 +92,7 @@ export default class MemeImage extends Component {
     }
 
     addTextToCanvas(canvas, memeTextObject) {
+        console.log("Chaliraxa add text");
         canvas.add(new fabric.Text(memeTextObject.text, {
             fontFamily: memeTextObject.settings.fontFamily,
             fill: memeTextObject.settings.color,
