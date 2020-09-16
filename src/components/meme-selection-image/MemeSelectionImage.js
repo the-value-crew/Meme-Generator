@@ -11,7 +11,6 @@ export default class MemeSelectionImage extends Component {
         return {
             backgroundImage: `url(${url})`,
             backgroundPosition: "center center",
-            backgroundSize: "contain",
             backgroundSize: "cover"
         }
     }

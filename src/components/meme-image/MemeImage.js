@@ -1,10 +1,10 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { fabric } from "fabric";
 
 let fabricObject = {};
 let canvas;
 
-export default class MemeImage extends Component {
+export default class MemeImage extends React.Component {
 
     componentDidMount() {
         canvas = new fabric.Canvas('memeCanvas');
@@ -15,7 +15,7 @@ export default class MemeImage extends Component {
     }
 
     static getDerivedStateFromProps(props, state) {
-        if (props.memeTextObject != state.memeTextObject) {
+        if (props.memeTextObject !== state.memeTextObject) {
             return {
                 memeTextObject: props.memeTextObject
             }
@@ -32,7 +32,7 @@ export default class MemeImage extends Component {
 
         this.loadBackgroundImageToCanvas(canvas, this.props.meme);
 
-        if (memeTextObject.text != "" && prevPrps.memeTextObject.text !== this.state.memeTextObject.text) {
+        if (memeTextObject.text !== "" && prevPrps.memeTextObject.text !== this.state.memeTextObject.text) {
             this.addTextToCanvas(canvas, memeTextObject);
         }
 
