@@ -29,8 +29,15 @@ export default class MemeImage extends React.Component {
         let memeTextObject = this.state.memeTextObject;
 
         this.loadCanvasData(canvas);
+        let url;
+        console.log(this.props.meme);
+        if (this.props.memeBackgroundImage) {
+            url = URL.createObjectURL(this.props.memeBackgroundImage);
+        } else if (this.props.meme) {
+            url = this.props.meme.url
+        }
 
-        this.loadBackgroundImageToCanvas(canvas, this.props.meme);
+        this.loadBackgroundImageToCanvas(canvas, url);
 
         if (memeTextObject.text !== "" && prevPrps.memeTextObject.text !== this.state.memeTextObject.text) {
             this.addTextToCanvas(canvas, memeTextObject);
@@ -102,8 +109,7 @@ export default class MemeImage extends React.Component {
     }
 
 
-    loadBackgroundImageToCanvas(canvas, meme) {
-        const { url } = meme;
+    loadBackgroundImageToCanvas(canvas, url) {
 
         fabric.Image.fromURL(url, function (meme) {
             canvas.setWidth(400);
@@ -115,13 +121,15 @@ export default class MemeImage extends React.Component {
         }.bind(this), {
             crossOrigin: 'anonymous'
         });
+
+        // this.props.onBackgroundImageSetFromUpload;
     }
 
 
     render() {
         return (
             <div>
-                <canvas id="memeCanvas" style={{ width: "100%", height: "auto" }} data-meme={this.props.meme.url} />
+                <canvas id="memeCanvas" style={{ width: "100%", height: "auto" }} />
             </div>
         )
     }

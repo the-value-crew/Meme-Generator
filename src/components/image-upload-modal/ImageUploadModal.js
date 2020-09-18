@@ -1,0 +1,50 @@
+import React from 'react'
+import Button from '../button/Button';
+import Modal from "../modal/Modal";
+import plusCircleIcon from '../../assets/icons/plus-circle.svg';
+
+
+class MemeTextSettingsModal extends React.Component {
+
+    constructor(props) {
+        super(props);
+        this.state = {
+            image: null
+        }
+    }
+
+    onClose = () => {
+        this.props.onClose();
+    }
+
+
+    onImageChange = event => {
+        if (event.target.files && event.target.files[0]) {
+            let uploadImage = event.target.files[0];
+            this.setState({
+                image: uploadImage
+            });
+            console.log(uploadImage);
+            console.log(URL.createObjectURL(uploadImage));
+        }
+    };
+
+    addImage = _ => {
+        this.props.image(this.state.image);
+        this.props.onClose();
+    }
+
+
+    render() {
+        return (
+            <Modal showModal={this.props.showModal} onClose={this.onClose}>
+                <input type="file" name="myImage" onChange={this.onImageChange} />
+                <div className="save-settings-button-wrapper">
+                    <Button buttonText="Add Image" buttonIcon={plusCircleIcon} onButtonClick={this.addImage} />
+                </div>
+            </Modal>
+        )
+    }
+}
+
+export default MemeTextSettingsModal

@@ -11,15 +11,14 @@ import "./sass/all.scss";
 import axios from "axios";
 import api from "./utils/api";
 import MemeImage from "./components/meme-image/MemeImage";
+import ImageUploadModal from "./components/image-upload-modal/ImageUploadModal";
 
 export default class App extends Component {
 
   constructor(props) {
     super(props);
     this.state = {
-      currentMeme: {
-
-      },
+      currentMeme: null,
       textData: {
         text: "",
         settings: {
@@ -28,7 +27,9 @@ export default class App extends Component {
         }
       },
       downloadMeme: false,
-      resetCanvas: false
+      resetCanvas: false,
+      showImageUploadModal: true,
+      memeBackgroundImage: null
     }
   }
 
@@ -67,6 +68,24 @@ export default class App extends Component {
     this.setState({resetCanvas: false});
   }
 
+  onShowImageModalClose = () => {
+    this.setState({showImageUploadModal: false});
+  }
+
+  addYourOwnImage = () => {
+    this.setState({showImageUploadModal: true});
+  }
+
+  onBackgroundImage = async image => {
+    await this.setState({memeBackgroundImage: image});
+    console.log("In App js");
+    console.log(this.state.memeBackgroundImage);
+  }
+
+  onBackgroundImageSetFromUpload = _ => {
+    this.setState({memeBackgroundImage: null});
+  }
+
 
   render() {
 
@@ -78,11 +97,12 @@ export default class App extends Component {
             <div className="meme-grid">
               <div className="col meme-col">
                 <MemeImage meme={this.state.currentMeme} memeTextObject={this.state.textData} downloadCanvas={this.state.downloadMeme}
-                  onImageDownloaded={this.onImageDownloaded} onMemeTextClear={this.onMemeTextClear} resetCanvas={this.state.resetCanvas} onCanvasReset={this.onCanvasReset} />
+                  onImageDownloaded={this.onImageDownloaded} onMemeTextClear={this.onMemeTextClear} resetCanvas={this.state.resetCanvas} back onCanvasReset={this.onCanvasReset} 
+                  memeBackgroundImage={this.state.memeBackgroundImage} onBackgroundImageSetFromUpload={this.onBackgroundImageSetFromUpload}/>
               </div>
               <div className="col meme-creator-col">
                 <div className="button-group">
-                  <Button buttonText="Add Your Own Image" buttonIcon={plusCircleIcon} />
+                  <Button buttonText="Add Your Own Image" buttonIcon={plusCircleIcon} onButtonClick={this.addYourOwnImage} />
                   <Button buttonText="Add Image to Your Meme" buttonIcon={plusCircleIcon} />
                 </div>
                 <div>
@@ -103,6 +123,7 @@ export default class App extends Component {
             </div>
           </section>
         </div>
+        <ImageUploadModal showModal={this.state.showImageUploadModal} onClose={this.onShowImageModalClose} image={this.onBackgroundImage}/>
       </div>
     );
   }
