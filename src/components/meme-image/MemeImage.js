@@ -11,16 +11,29 @@ export default class MemeImage extends React.Component {
     }
 
     state = {
-        memeTextObject: {}
+        memeTextObject: {},
+        memeBackgroundImage: null,
+        memeBackgroundImageUrl: null
     }
 
     static getDerivedStateFromProps(props, state) {
+        
+        let stateChanges = {}
+        
         if (props.memeTextObject !== state.memeTextObject) {
-            return {
-                memeTextObject: props.memeTextObject
-            }
+                stateChanges.memeTextObject = props.memeTextObject
         }
-        return null;
+
+        if (props.memeBackgroundImage) {
+            console.log(props.memeBackgroundImage);
+            stateChanges.memeBackgroundImageUrl = URL.createObjectURL(props.memeBackgroundImage);
+            props.onBackgroundImageSetFromUpload();
+        } else if(props.meme) {
+            console.log(props.meme);
+            stateChanges.memeBackgroundImageUrl = props.meme.url
+        } 
+        
+        return stateChanges;
     }
 
     componentDidUpdate(prevPrps, prevState) {
@@ -29,15 +42,9 @@ export default class MemeImage extends React.Component {
         let memeTextObject = this.state.memeTextObject;
 
         this.loadCanvasData(canvas);
-        let url;
-        console.log(this.props.meme);
-        if (this.props.memeBackgroundImage) {
-            url = URL.createObjectURL(this.props.memeBackgroundImage);
-        } else if (this.props.meme) {
-            url = this.props.meme.url
-        }
-
-        this.loadBackgroundImageToCanvas(canvas, url);
+        console.log("Set bg state");
+        console.log(this.state.memeBackgroundImageUrl);
+        this.loadBackgroundImageToCanvas(canvas, this.state.memeBackgroundImageUrl);
 
         if (memeTextObject.text !== "" && prevPrps.memeTextObject.text !== this.state.memeTextObject.text) {
             this.addTextToCanvas(canvas, memeTextObject);
@@ -50,18 +57,17 @@ export default class MemeImage extends React.Component {
             this.props.onMemeTextClear();
             this.saveImage(canvas);
             this.deleteCanvasObjects(canvas);
-            console.log(fabricObject);
         }
 
         if (this.props.resetCanvas) {
             this.deleteCanvasObjects(canvas);
-            console.log(fabricObject);
             this.props.onCanvasReset();
         }
 
         canvas.on('mouse:out', (e) => this.handleMouseOut(e, canvas));
 
     }
+
 
     saveCanvasData(canvas) {
         fabricObject = JSON.stringify(canvas.toJSON());
@@ -121,8 +127,6 @@ export default class MemeImage extends React.Component {
         }.bind(this), {
             crossOrigin: 'anonymous'
         });
-
-        // this.props.onBackgroundImageSetFromUpload;
     }
 
 

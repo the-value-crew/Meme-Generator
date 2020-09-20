@@ -11,6 +11,7 @@ class MemeTextSettingsModal extends React.Component {
         this.state = {
             image: null
         }
+        this.imageUpload = React.createRef();
     }
 
     onClose = () => {
@@ -24,21 +25,24 @@ class MemeTextSettingsModal extends React.Component {
             this.setState({
                 image: uploadImage
             });
-            console.log(uploadImage);
-            console.log(URL.createObjectURL(uploadImage));
         }
     };
+
+    clearImageUpload = _ =>{
+        this.imageUpload.current.value = '';
+    }
 
     addImage = _ => {
         this.props.image(this.state.image);
         this.props.onClose();
+        this.clearImageUpload();
     }
 
 
     render() {
         return (
             <Modal showModal={this.props.showModal} onClose={this.onClose}>
-                <input type="file" name="myImage" onChange={this.onImageChange} />
+                <input type="file" name="myImage" ref={this.imageUpload} onChange={this.onImageChange} />
                 <div className="save-settings-button-wrapper">
                     <Button buttonText="Add Image" buttonIcon={plusCircleIcon} onButtonClick={this.addImage} />
                 </div>
