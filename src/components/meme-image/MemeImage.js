@@ -15,13 +15,13 @@ export default class MemeImage extends React.Component {
     }
 
     static getDerivedStateFromProps(props, state) {
-        
+
         let stateChanges = {}
-        
+
         if (props.memeTextObject !== state.memeTextObject) {
-                stateChanges.memeTextObject = props.memeTextObject
+            stateChanges.memeTextObject = props.memeTextObject
         }
-        
+
         return stateChanges;
     }
 
@@ -31,7 +31,10 @@ export default class MemeImage extends React.Component {
         let memeTextObject = this.state.memeTextObject;
 
         this.loadCanvasData(canvas);
-        this.loadBackgroundImageToCanvas(canvas, this.props.memeBackgroundImage.url);
+        
+        if (this.props.memeBackgroundImage) {
+            this.loadBackgroundImageToCanvas(canvas, this.props.memeBackgroundImage.url);
+        }
 
         if (memeTextObject.text !== "" && prevPrps.memeTextObject.text !== this.state.memeTextObject.text) {
             this.addTextToCanvas(canvas, memeTextObject);

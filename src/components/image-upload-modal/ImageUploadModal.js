@@ -39,7 +39,7 @@ class MemeTextSettingsModal extends React.Component {
         if (event.target.files && event.target.files[0]) {
             let uploadImage = event.target.files[0];
             let self = this;
-            this.getAppropriateFormat(uploadImage, function (imageObject) {
+            this.getAppropriateFormat(uploadImage, (imageObject) => {
                 self.setState({
                     image: imageObject
                 });
