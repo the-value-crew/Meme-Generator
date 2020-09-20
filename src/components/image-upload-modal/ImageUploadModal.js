@@ -18,17 +18,36 @@ class MemeTextSettingsModal extends React.Component {
         this.props.onClose();
     }
 
+    getAppropriateFormat = (imageObj, callback) => {
+        let name = imageObj.name;
+        let url = URL.createObjectURL(imageObj);
+        let width = 2, height;
+        let img = new Image();
+        img.src = url;
+        img.onload = function () {
+            console.log(this.width);
+            console.log(url);
+            width = this.width;
+            height = this.height;
+            console.log(width);
+
+            if (callback) callback({ name, url, width, height })
+        }
+    }
 
     onImageChange = event => {
         if (event.target.files && event.target.files[0]) {
             let uploadImage = event.target.files[0];
-            this.setState({
-                image: uploadImage
+            let self = this;
+            this.getAppropriateFormat(uploadImage, function (imageObject) {
+                self.setState({
+                    image: imageObject
+                });
             });
         }
     };
 
-    clearImageUpload = _ =>{
+    clearImageUpload = _ => {
         this.imageUpload.current.value = '';
     }
 

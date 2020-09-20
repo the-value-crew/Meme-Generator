@@ -76,16 +76,6 @@ export default class App extends Component {
     this.setState({showImageUploadModal: true});
   }
 
-  onBackgroundImage = async image => {
-    await this.setState({memeBackgroundImage: image});
-    console.log("In App js");
-    console.log(this.state.memeBackgroundImage);
-  }
-
-  onBackgroundImageSetFromUpload = _ => {
-    this.setState({memeBackgroundImage: null});
-  }
-
 
   render() {
 
@@ -96,9 +86,9 @@ export default class App extends Component {
           <section className="meme-generator-section">
             <div className="meme-grid">
               <div className="col meme-col">
-                <MemeImage meme={this.state.currentMeme} memeTextObject={this.state.textData} downloadCanvas={this.state.downloadMeme}
-                  onImageDownloaded={this.onImageDownloaded} onMemeTextClear={this.onMemeTextClear} resetCanvas={this.state.resetCanvas} back onCanvasReset={this.onCanvasReset} 
-                  memeBackgroundImage={this.state.memeBackgroundImage} onBackgroundImageSetFromUpload={this.onBackgroundImageSetFromUpload}/>
+                <MemeImage memeBackgroundImage={this.state.currentMeme} memeTextObject={this.state.textData} downloadCanvas={this.state.downloadMeme}
+                  onImageDownloaded={this.onImageDownloaded} onMemeTextClear={this.onMemeTextClear} resetCanvas={this.state.resetCanvas} onCanvasReset={this.onCanvasReset} 
+                  />
               </div>
               <div className="col meme-creator-col">
                 <div className="button-group">
@@ -123,7 +113,7 @@ export default class App extends Component {
             </div>
           </section>
         </div>
-        <ImageUploadModal showModal={this.state.showImageUploadModal} onClose={this.onShowImageModalClose} image={this.onBackgroundImage}/>
+        <ImageUploadModal showModal={this.state.showImageUploadModal} onClose={this.onShowImageModalClose} image={this.onMemeSelection}/>
       </div>
     );
   }

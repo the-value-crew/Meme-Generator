@@ -12,8 +12,6 @@ export default class MemeImage extends React.Component {
 
     state = {
         memeTextObject: {},
-        memeBackgroundImage: null,
-        memeBackgroundImageUrl: null
     }
 
     static getDerivedStateFromProps(props, state) {
@@ -23,15 +21,6 @@ export default class MemeImage extends React.Component {
         if (props.memeTextObject !== state.memeTextObject) {
                 stateChanges.memeTextObject = props.memeTextObject
         }
-
-        if (props.memeBackgroundImage) {
-            console.log(props.memeBackgroundImage);
-            stateChanges.memeBackgroundImageUrl = URL.createObjectURL(props.memeBackgroundImage);
-            props.onBackgroundImageSetFromUpload();
-        } else if(props.meme) {
-            console.log(props.meme);
-            stateChanges.memeBackgroundImageUrl = props.meme.url
-        } 
         
         return stateChanges;
     }
@@ -42,9 +31,7 @@ export default class MemeImage extends React.Component {
         let memeTextObject = this.state.memeTextObject;
 
         this.loadCanvasData(canvas);
-        console.log("Set bg state");
-        console.log(this.state.memeBackgroundImageUrl);
-        this.loadBackgroundImageToCanvas(canvas, this.state.memeBackgroundImageUrl);
+        this.loadBackgroundImageToCanvas(canvas, this.props.memeBackgroundImage.url);
 
         if (memeTextObject.text !== "" && prevPrps.memeTextObject.text !== this.state.memeTextObject.text) {
             this.addTextToCanvas(canvas, memeTextObject);
