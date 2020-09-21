@@ -29,15 +29,20 @@ export default class MemeImage extends React.Component {
 
         console.log(this.state.memeTextObject);
         let memeTextObject = this.state.memeTextObject;
+        let imageToAddToMeme = this.props.imageToAddToMeme;
 
         this.loadCanvasData(canvas);
-        
+
         if (this.props.memeBackgroundImage) {
             this.loadBackgroundImageToCanvas(canvas, this.props.memeBackgroundImage.url);
         }
 
         if (memeTextObject.text !== "" && prevPrps.memeTextObject.text !== this.state.memeTextObject.text) {
             this.addTextToCanvas(canvas, memeTextObject);
+        }
+
+        if (imageToAddToMeme) {
+            this.addImageToMeme(canvas, imageToAddToMeme);
         }
 
         this.saveCanvasData(canvas);
@@ -61,6 +66,16 @@ export default class MemeImage extends React.Component {
 
     saveCanvasData(canvas) {
         fabricObject = JSON.stringify(canvas.toJSON());
+    }
+
+    addImageToMeme = (canvas, imageObject) => {
+        let url = imageObject.url;
+
+        fabric.Image.fromURL(url, function (image) {
+            canvas.add(image);
+        });
+
+        this.props.onImageAddedToMeme();
     }
 
     deleteCanvasObjects(canvas) {

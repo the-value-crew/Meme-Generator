@@ -28,8 +28,10 @@ export default class App extends Component {
       },
       downloadMeme: false,
       resetCanvas: false,
-      showImageUploadModal: true,
-      memeBackgroundImage: null
+      showImageBgUploadModal: false,
+      showImageAddModal: false,
+      memeBackgroundImage: null,
+      imageToAddToMeme: null
     }
   }
 
@@ -63,19 +65,33 @@ export default class App extends Component {
     this.setState({ resetCanvas: true });
   }
 
-  onCanvasReset = () =>{
+  onCanvasReset = () => {
     this.onMemeTextClear();
-    this.setState({resetCanvas: false});
+    this.setState({ resetCanvas: false });
   }
 
-  onShowImageModalClose = () => {
-    this.setState({showImageUploadModal: false});
+  onShowImageBgUploadModalClose = () => {
+    this.setState({ showImageBgUploadModal: false });
+  }
+
+  onShowImageAddModalClose = () => {
+    this.setState({ showImageAddModal: false });
   }
 
   addYourOwnImage = () => {
-    this.setState({showImageUploadModal: true});
+    this.setState({ showImageBgUploadModal: true });
+  }
+  addImageTomMeme = () => {
+    this.setState({ showImageAddModal: true });
   }
 
+  addImage = (imageObj) => {
+    this.setState({ imageToAddToMeme: imageObj })
+  }
+
+  onImageAddedToMeme = _ => {
+    this.setState({imageToAddToMeme: null});
+  }
 
   render() {
 
@@ -87,13 +103,14 @@ export default class App extends Component {
             <div className="meme-grid">
               <div className="col meme-col">
                 <MemeImage memeBackgroundImage={this.state.currentMeme} memeTextObject={this.state.textData} downloadCanvas={this.state.downloadMeme}
-                  onImageDownloaded={this.onImageDownloaded} onMemeTextClear={this.onMemeTextClear} resetCanvas={this.state.resetCanvas} onCanvasReset={this.onCanvasReset} 
-                  />
+                  onImageDownloaded={this.onImageDownloaded} onMemeTextClear={this.onMemeTextClear} resetCanvas={this.state.resetCanvas} onCanvasReset={this.onCanvasReset}
+                  imageToAddToMeme={this.state.imageToAddToMeme}  onImageAddedToMeme={this.onImageAddedToMeme}
+                />
               </div>
               <div className="col meme-creator-col">
                 <div className="button-group">
                   <Button buttonText="Add Your Own Image" buttonIcon={plusCircleIcon} onButtonClick={this.addYourOwnImage} />
-                  <Button buttonText="Add Image to Your Meme" buttonIcon={plusCircleIcon} />
+                  <Button buttonText="Add Image to Your Meme" buttonIcon={plusCircleIcon} onButtonClick={this.addImageTomMeme} />
                 </div>
                 <div>
                   <MemeSelection memes={api.getAllMemes(axios)} onMemeSelection={this.onMemeSelection} />
@@ -113,7 +130,8 @@ export default class App extends Component {
             </div>
           </section>
         </div>
-        <ImageUploadModal showModal={this.state.showImageUploadModal} onClose={this.onShowImageModalClose} image={this.onMemeSelection}/>
+        <ImageUploadModal showModal={this.state.showImageBgUploadModal} onClose={this.onShowImageBgUploadModalClose} image={this.onMemeSelection} />
+        <ImageUploadModal showModal={this.state.showImageAddModal} onClose={this.onShowImageAddModalClose} image={this.addImage} />
       </div>
     );
   }

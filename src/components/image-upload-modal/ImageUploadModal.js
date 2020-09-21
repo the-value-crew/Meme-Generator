@@ -25,11 +25,8 @@ class MemeTextSettingsModal extends React.Component {
         let img = new Image();
         img.src = url;
         img.onload = function () {
-            console.log(this.width);
-            console.log(url);
             width = this.width;
             height = this.height;
-            console.log(width);
 
             if (callback) callback({ name, url, width, height })
         }
