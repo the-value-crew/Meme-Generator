@@ -123,7 +123,6 @@ export default class MemeImage extends React.Component {
     loadBackgroundImageToCanvas(canvas, url) {
 
         fabric.Image.fromURL(url, function (meme) {
-            canvas.setWidth(400);
             canvas.setHeight(meme.height);
             canvas.setBackgroundImage(meme, canvas.renderAll.bind(canvas), {
                 scaleX: canvas.width / meme.width,

@@ -90,7 +90,7 @@ export default class App extends Component {
   }
 
   onImageAddedToMeme = _ => {
-    this.setState({imageToAddToMeme: null});
+    this.setState({ imageToAddToMeme: null });
   }
 
   render() {
