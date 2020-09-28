@@ -1,5 +1,6 @@
 import React from 'react';
 import { fabric } from "fabric";
+import "./meme-image.scss"
 
 let fabricObject = {};
 let canvas;
@@ -10,8 +11,14 @@ export default class MemeImage extends React.Component {
         canvas = new fabric.Canvas('memeCanvas');
     }
 
-    state = {
-        memeTextObject: {},
+
+
+    constructor(props) {
+        super(props);
+        this.state = {
+            memeTextObject: {},
+        };
+        this.memeColRef = React.createRef();
     }
 
     static getDerivedStateFromProps(props, state) {
@@ -25,9 +32,18 @@ export default class MemeImage extends React.Component {
         return stateChanges;
     }
 
+    getMemeDivWidth = (_) => this.memeColRef.current.offsetWidth;
+
+    getAppropriateCanvasHeight = (memeWidth, memeHeight) => {
+        let ratio = memeHeight / memeWidth;
+        let newHeight = ratio * this.getMemeDivWidth();
+        return newHeight;
+    }
+
     componentDidUpdate(prevPrps, prevState) {
 
         console.log(this.state.memeTextObject);
+        console.log(this.memeColRef.current.offsetWidth);
         let memeTextObject = this.state.memeTextObject;
         let imageToAddToMeme = this.props.imageToAddToMeme;
 
@@ -60,6 +76,8 @@ export default class MemeImage extends React.Component {
         }
 
         canvas.on('mouse:out', (e) => this.handleMouseOut(e, canvas));
+
+
 
     }
 
@@ -123,7 +141,10 @@ export default class MemeImage extends React.Component {
     loadBackgroundImageToCanvas(canvas, url) {
 
         fabric.Image.fromURL(url, function (meme) {
-            canvas.setHeight(meme.height);
+            let width = this.getMemeDivWidth();
+            let height = this.getAppropriateCanvasHeight(meme.width, meme.height);
+            canvas.setHeight(height);
+            canvas.setWidth(width);
             canvas.setBackgroundImage(meme, canvas.renderAll.bind(canvas), {
                 scaleX: canvas.width / meme.width,
                 scaleY: canvas.height / meme.height
@@ -136,8 +157,8 @@ export default class MemeImage extends React.Component {
 
     render() {
         return (
-            <div>
-                <canvas id="memeCanvas" style={{ width: "100%", height: "auto" }} />
+            <div ref={this.memeColRef}>
+                <canvas id="memeCanvas" style={{ width: "100% !important", height: "auto" }} ></canvas>
             </div>
         )
     }

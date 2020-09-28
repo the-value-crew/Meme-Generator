@@ -31,7 +31,7 @@ export default class App extends Component {
       showImageBgUploadModal: false,
       showImageAddModal: false,
       memeBackgroundImage: null,
-      imageToAddToMeme: null
+      imageToAddToMeme: null,
     }
   }
 
@@ -101,7 +101,7 @@ export default class App extends Component {
           <Header />
           <section className="meme-generator-section">
             <div className="meme-grid">
-              <div className="col meme-col">
+              <div className="col meme-col" ref={this.memeColRef}>
                 <MemeImage memeBackgroundImage={this.state.currentMeme} memeTextObject={this.state.textData} downloadCanvas={this.state.downloadMeme}
                   onImageDownloaded={this.onImageDownloaded} onMemeTextClear={this.onMemeTextClear} resetCanvas={this.state.resetCanvas} onCanvasReset={this.onCanvasReset}
                   imageToAddToMeme={this.state.imageToAddToMeme}  onImageAddedToMeme={this.onImageAddedToMeme}
