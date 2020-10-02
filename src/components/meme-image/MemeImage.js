@@ -106,7 +106,7 @@ export default class MemeImage extends React.Component {
             format: 'jpeg',
             quality: 0.8
         });
-        link.download = 'canvas.png';
+        link.download = 'meme.png';
         link.click();
         this.onImageSaved();
     }
