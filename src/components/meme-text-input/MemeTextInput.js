@@ -23,6 +23,7 @@ class MemeTextInput extends React.Component {
         if (e.key === 'Enter') {
             let textData = { ...this.state.textData };
             textData.text = e.target.value;
+            e.target.value = " ";
             await this.setState({ textData });
             this.props.onTextInput(this.state.textData);
         }
