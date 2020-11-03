@@ -15,5 +15,4 @@ const getAllMemes = async (_) => {
 }
 
 
-
 module.exports = { getAllMemes }
